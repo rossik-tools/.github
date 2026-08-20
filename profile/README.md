@@ -1,12 +1,12 @@
 # Rossik Tools
 
-Interne Werkzeug-Plattform der E. Rossik Transport & Logistics GmbH - rossiktools.com
+Internal tools platform of E. Rossik Transport & Logistics GmbH - rossiktools.com
 
-**Ein Modul = ein Repo = eine Subdomain.** Schrittweise gebaut, sauber getrennt.
+**One module = one repo = one subdomain.** Built step by step, cleanly separated.
 
-| Repo | Modul | Live |
+| Repo | Module | Live |
 |---|---|---|
-| portal | Startseite + Plattform-Doku | rossiktools.com |
-| orgchart | Organigramm der Gruppe | orgchart.rossiktools.com |
+| portal | Landing page + platform docs | rossiktools.com |
+| orgchart | Group organization chart | orgchart.rossiktools.com |
 
-Arbeitsregeln: [REGELN.md](https://github.com/rossik-tools/.github/blob/main/REGELN.md)
+Working rules: [RULES.md](https://github.com/rossik-tools/.github/blob/main/RULES.md)

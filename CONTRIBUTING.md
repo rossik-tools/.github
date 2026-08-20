@@ -1,4 +1,4 @@
-# Mitarbeiten
+# Contributing
 
-Die verbindlichen Arbeitsregeln der Organisation stehen in [REGELN.md](./REGELN.md).
-Kurzfassung: eigener Branch -> kleiner PR -> Review -> Merge -> Deploy aus main. Secrets nie im Code. main ist heilig.
+The binding working rules of this organization live in [RULES.md](./RULES.md).
+Short version: own branch -> small PR -> review -> merge -> deploy from main. Secrets never in code. Everything in English. main is sacred.

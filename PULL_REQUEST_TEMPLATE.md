@@ -1,11 +1,12 @@
-## Was macht dieser PR?
+## What does this PR do?
 
-<!-- 1-3 Saetze. Ein PR = ein Thema. -->
+<!-- 1-3 sentences. One PR = one topic. -->
 
-## Checkliste (Definition of Done)
+## Checklist (Definition of Done)
 
-- [ ] Build laeuft, Kernfunktion lokal geprueft
-- [ ] Sicherheits-Standard eingehalten (RLS, anon+PUBLIC revoked, NULL-sichere Guards) - oder kein DB-Anteil
-- [ ] Migrationen liegen als Datei im PR - oder keine DB-Aenderung
-- [ ] Doku/README angepasst - oder nicht noetig
-- [ ] Keine Secrets, keine Produktivdaten im Diff
+- [ ] Build passes, core function verified locally
+- [ ] Security standard met (RLS, anon+PUBLIC revoked, NULL-safe guards) - or no DB changes
+- [ ] Migrations included as files in this PR - or no DB changes
+- [ ] Docs/README updated - or not needed
+- [ ] No secrets, no production data in the diff
+- [ ] Everything in English
