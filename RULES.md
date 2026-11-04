@@ -1,7 +1,7 @@
 # Rossik Tools - Organization Working Rules
 
 > Applies to EVERY repo in github.com/rossik-tools. Changes to this document only via PR approved by Filip.
-> Status: 2026-10-23, Version 1.2
+> Status: 2026-11-04, Version 1.3
 
 ## 0. Guiding principle
 
@@ -54,6 +54,12 @@ being rediscovered again.
 5. **DB migrations** travel as files inside the PR. They are applied to the database only AFTER the merge, by the module owner. Repo and database must always match.
 6. **Commits in English**, format `type(scope): what` - e.g. `feat(leave): telegram webhook`, `fix(orgchart): mobile layout`.
 7. **AI work (Claude Code, Lovable) follows the same rules.** The repo's AGENTS.md is binding for every AI session.
+8. **Design changes cover every app in one go.** A change to the shared look (logo, tab icon, brand
+   colors, anything asked for "across the whole app") goes into EVERY module repo in the same round:
+   all of rossik-tools with a web UI, RTS and the intranet, whoever owns the module. Start from the
+   full repo list, not from what happens to be cloned locally. Same title in every repo, one PR per repo.
+   Module ownership covers logic and data, not the shared design. Legal pages and DNS still need
+   Filip's GO (section 4).
 
 ## 3. WHAT - Definition of Done
 
