@@ -1,7 +1,7 @@
 # Rossik Tools - Organization Working Rules
 
 > Applies to EVERY repo in github.com/rossik-tools. Changes to this document only via PR approved by Filip.
-> Status: 2026-08-20, Version 1.1
+> Status: 2026-10-23, Version 1.2
 
 ## 0. Guiding principle
 
@@ -25,6 +25,25 @@ any language; the moment something lands in a repo, it is English.
 | Database | Supabase. Each module touches ONLY its own table prefix. Foreign prefixes are off-limits - even read access only by agreement |
 | Secrets | NEVER in code, commits, or chats. Vault (rossik-core) or function secrets. No exceptions |
 | Hosting | Cloudflare (Pages/Workers). Deploys only from `main`, never from local working copies |
+
+### Two things every new Worker gets wrong
+
+Both have now cost time in more than one repo, so they belong here rather than
+being rediscovered again.
+
+- **Pin `wranglerVersion` in `cloudflare/wrangler-action`.** The action's
+  default is 3.90, which predates `wrangler.jsonc` support and fails with
+  `Missing entry-point` — which reads like a broken build, not an old tool.
+  Hit on the first deploy of it-inventory (14.10.2026), rts-fleet-monitor
+  (22.10.2026) and timekeeping (23.10.2026). Pin a version at least a day old:
+  a release published that morning fails the supply-chain guard in
+  `bunfig.toml`.
+
+- **Set `workers_dev: false` and `preview_urls: false`.** Both default to on,
+  and either one publishes a second copy of the app on a `*.workers.dev` or
+  preview hostname — *outside* the Cloudflare Access application protecting the
+  real domain. The module's own token check should still refuse those requests,
+  but that is a second lock, not a reason to leave the door published.
 
 ## 2. HOW - Workflow
 
