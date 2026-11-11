@@ -1,7 +1,7 @@
 # Rossik Tools - Organization Working Rules
 
 > Applies to EVERY repo in github.com/rossik-tools. Changes to this document only via PR approved by Filip.
-> Status: 2026-11-04, Version 1.3
+> Status: 2026-11-11, Version 1.4
 
 ## 0. Guiding principle
 
@@ -47,9 +47,20 @@ being rediscovered again.
 
 ## 2. HOW - Workflow
 
-1. **`main` is sacred.** Always working, always the state that is live. Direct pushes are technically blocked.
+1. **`main` is sacred.** Always working, always the state that is live. No direct pushes: an organization
+   ruleset blocks them (see "Enforcement" below for the one exception and the rollout).
 2. **Everyone works on their own branch** (`filip`, `bogdan`, ...). Experiments belong there and are welcome.
-3. **Code reaches main only via pull request** with at least 1 approval. You do not approve your own PRs.
+3. **Code reaches main only via pull request.** The author may merge their own PR once it is green -
+   except for the changes below, which need the approval of a second person, and you do not approve
+   your own:
+   - database migrations, and anything that changes grants, policies, roles or function rights
+   - access control: Cloudflare Access configuration, the Access/auth check files of a module, how
+     secrets are read
+   - deploy workflows (`.github/workflows/`) and Worker/Pages configuration (`wrangler.*`)
+   - this document
+
+   These are the changes where a mistake is not visible on the screen and not caught by a test. For
+   everything else, the pull request is the record and the CI gate is the check.
 4. **Small PRs.** One PR = one topic. 200 changed lines are reviewable; 2,000 are not.
 5. **DB migrations** travel as files inside the PR. They are applied to the database only AFTER the merge, by the module owner. Repo and database must always match.
 6. **Commits in English**, format `type(scope): what` - e.g. `feat(leave): telegram webhook`, `fix(orgchart): mobile layout`.
@@ -60,6 +71,17 @@ being rediscovered again.
    full repo list, not from what happens to be cloned locally. Same title in every repo, one PR per repo.
    Module ownership covers logic and data, not the shared design. Legal pages and DNS still need
    Filip's GO (section 4).
+
+### Enforcement
+
+A rule that the tooling does not enforce is a wish. So:
+
+- One organization ruleset covers every repo: pull request required for `main`, no bypass for admins.
+- The second-person approval for the changes listed in rule 3 is enforced through `CODEOWNERS` (both
+  maintainers own those paths, so either can approve the other's change).
+- Exception: `intranet` receives direct pushes from the Lovable sync. It stays exempt until the
+  intranet is retired; nothing else is.
+- Until the ruleset and the `CODEOWNERS` files are in place in a repo, the rule applies by agreement.
 
 ## 3. WHAT - Definition of Done
 
@@ -77,7 +99,7 @@ A task is done when ALL of this holds - otherwise it is "in progress":
 | Action | Requires |
 |---|---|
 | Working on your own branch | nothing - full speed |
-| Merge to main | PR + 1 approval (technically enforced) |
+| Merge to main | PR. Approval of a second person for database, access control and deploy changes (section 2, rule 3) |
 | Deploy / publish / DNS change | Filip's GO |
 | New domain, new service, new cost | Filip's GO |
 | Permission changes (GitHub, Supabase, Cloudflare, Access) | Filip's GO |
