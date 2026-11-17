@@ -32,7 +32,8 @@ export function extractAccessToken(req: Request): string | null {
   if (header && header.length > 20) return header.trim();
   const cookie = req.headers.get("Cookie") ?? "";
   const m = cookie.match(/(?:^|;\s*)CF_Authorization=([^;]+)/);
-  return m ? decodeURIComponent(m[1]) : null;
+  const value = m?.[1];
+  return value ? decodeURIComponent(value) : null;
 }
 
 /**
