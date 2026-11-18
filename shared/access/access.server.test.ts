@@ -60,4 +60,8 @@ describe("extractAccessToken", () => {
   test("returns null when neither is there", () => {
     expect(extractAccessToken(req({ Cookie: "theme=dark" }))).toBeNull();
   });
+
+  test("returns null for a cookie that cannot be decoded, instead of throwing", () => {
+    expect(extractAccessToken(req({ Cookie: `CF_Authorization=${"c".repeat(30)}%` }))).toBeNull();
+  });
 });

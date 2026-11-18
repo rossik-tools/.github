@@ -33,7 +33,14 @@ export function extractAccessToken(req: Request): string | null {
   const cookie = req.headers.get("Cookie") ?? "";
   const m = cookie.match(/(?:^|;\s*)CF_Authorization=([^;]+)/);
   const value = m?.[1];
-  return value ? decodeURIComponent(value) : null;
+  if (!value) return null;
+  // decodeURIComponent throws on a malformed escape ("%"), and this runs before anything is
+  // verified. A cookie that cannot be decoded is simply not a token: deny cleanly, never 500.
+  try {
+    return decodeURIComponent(value);
+  } catch {
+    return null;
+  }
 }
 
 /**
