@@ -1,7 +1,7 @@
 # Rossik Tools - Organization Working Rules
 
-> Applies to EVERY repo in github.com/rossik-tools. Changes to this document only via PR approved by Filip.
-> Status: 2026-11-11, Version 1.4
+> Applies to EVERY repo in github.com/rossik-tools. Changes to this document only via PR, approved by the other developer (section 2, rule 3).
+> Status: 2026-11-27, Version 1.5
 
 ## 0. Guiding principle
 
@@ -69,8 +69,22 @@ being rediscovered again.
    colors, anything asked for "across the whole app") goes into EVERY module repo in the same round:
    all of rossik-tools with a web UI, RTS and the intranet, whoever owns the module. Start from the
    full repo list, not from what happens to be cloned locally. Same title in every repo, one PR per repo.
-   Module ownership covers logic and data, not the shared design. Legal pages and DNS still need
-   Filip's GO (section 4).
+   Module ownership covers logic and data, not the shared design. Legal pages stay with Filip (their
+   content is a business matter); DNS needs a developer's GO (section 4).
+9. **Before a repo gets a one-person gate, ask whether the other maintainer works on it.** When you set
+   up a new repo, or add a rule that only one named person may do a step (approve, merge, enter a
+   secret, deploy, run a migration, change production), the AI session pauses and asks the person it
+   works for, in about these words:
+
+   > "Will Bogdan be working on this repository as well? If so, on the design only, or on the
+   > functionality too? If it is the functionality: with this rule in place, each of those steps
+   > waits for you, so his work will take longer. Shall we keep the rule as it is, or give him the
+   > same rights in this repository?"
+
+   (In a repo Bogdan sets up, the same question is asked about Filip.) The answer goes into the repo's
+   AGENTS.md. A step that needs a particular account, for example a Databricks workspace admin to
+   create a service principal, is written as that, not as "only <person>". Both maintainers enter
+   secrets and do production steps where they have the access (decided 2026-11-27).
 
 ### Enforcement
 
@@ -100,10 +114,13 @@ A task is done when ALL of this holds - otherwise it is "in progress":
 |---|---|
 | Working on your own branch | nothing - full speed |
 | Merge to main | PR. Approval of a second person for database, access control and deploy changes (section 2, rule 3) |
-| Deploy / publish / DNS change | Filip's GO |
-| New domain, new service, new cost | Filip's GO |
-| Permission changes (GitHub, Supabase, Cloudflare, Access) | Filip's GO |
-| Deleting data or infrastructure | Filip's GO, explicitly |
+| Deploy / publish / DNS change | GO of either developer |
+| New domain, new service, new cost | GO of either developer |
+| Permission changes (GitHub, Supabase, Cloudflare, Access) | GO of either developer |
+| Deleting data or infrastructure | GO of either developer, given explicitly |
+
+Either developer can give these GOs. Nobody waits for the other person, unless the two agreed on
+it beforehand for a specific step and recorded it in the repo's AGENTS.md (section 2, rule 9).
 
 ## 5. Security - minimum standard for every PR touching the database
 
@@ -118,11 +135,15 @@ A task is done when ALL of this holds - otherwise it is "in progress":
 
 | Person | Role |
 |---|---|
-| Filip | Owner. Approvals, merges, permissions, infrastructure |
-| Bogdan | Developer. Write access on assigned repos, works on branch `bogdan` |
+| Filip | Owner and developer. Works on branch `filip` |
+| Bogdan | Developer. Works on branch `bogdan` |
 | Module owner | named per repo (in its README). Responsible for quality and DB state of the module |
 
-Access is granted per repo, never wholesale. New members start with read access.
+Both developers have the same rights: approvals, merges, permissions, infrastructure and secrets,
+in every repo. Where only one account can do something (for example a Databricks workspace admin
+creating a service principal), that is a property of the account, not a rule about the person.
+
+Access for anyone else is granted per repo, never wholesale. New members start with read access.
 
 ## 7. Recording decisions
 
