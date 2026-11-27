@@ -1,7 +1,7 @@
 # Rossik Tools - Organization Working Rules
 
 > Applies to EVERY repo in github.com/rossik-tools. Changes to this document only via PR approved by Filip.
-> Status: 2026-11-11, Version 1.4
+> Status: 2026-11-27, Version 1.5
 
 ## 0. Guiding principle
 
@@ -71,6 +71,20 @@ being rediscovered again.
    full repo list, not from what happens to be cloned locally. Same title in every repo, one PR per repo.
    Module ownership covers logic and data, not the shared design. Legal pages and DNS still need
    Filip's GO (section 4).
+9. **Before a repo gets a one-person gate, ask whether the other maintainer works on it.** When you set
+   up a new repo, or add a rule that only one named person may do a step (approve, merge, enter a
+   secret, deploy, run a migration, change production), the AI session pauses and asks the person it
+   works for, in about these words:
+
+   > "Will Bogdan be working on this repository as well? If so, on the design only, or on the
+   > functionality too? If it is the functionality: with this rule in place, each of those steps
+   > waits for you, so his work will take longer. Shall we keep the rule as it is, or give him the
+   > same rights in this repository?"
+
+   (In a repo Bogdan sets up, the same question is asked about Filip.) The answer goes into the repo's
+   AGENTS.md. A step that needs a particular account, for example a Databricks workspace admin to
+   create a service principal, is written as that, not as "only <person>". Both maintainers enter
+   secrets and do production steps where they have the access (decided 2026-11-27).
 
 ### Enforcement
 
